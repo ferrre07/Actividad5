@@ -1,0 +1,34 @@
+<div class="contenedor">
+<section id="formulario">
+    <div class="form">
+        <h1>Formulario</h1>
+
+        <div class="form2">
+            <label for="titulo">Titulo</label>
+            <input type="text" id="titulo" placeholder="Introduce el título de la noticia"
+                [(ngModel)]="newNoticia.titulo">
+        </div>
+
+        <div class="form2">
+            <label for="img">Imagen</label>
+            <input type="text" id="img" placeholder="Introduce una imagen" [(ngModel)]="newNoticia.img">
+        </div>
+        <div class="form2">
+            <label for="cuerpo">Cuerpo</label>
+            <input type="text" id="cuerpo" placeholder="Introduce el cuerpo de la noticia"
+                [(ngModel)]="newNoticia.cuerpo">
+        </div>
+        <div class="form2">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" placeholder="Introduce la fecha de hoy" [(ngModel)]="newNoticia.fecha">
+        </div>
+
+        <button (click)="getDataForm()">Guardar Noticia</button>
+    </div>
+</section>
+<section id="agendanoticias">
+    <div  [innerHTML]="cargarNoticias()">
+
+    </div>
+</section>
+</div>

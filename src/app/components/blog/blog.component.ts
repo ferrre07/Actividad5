@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { Noticia } from './interfaces/noticia.interface';
+import { Component, Input } from '@angular/core';
+import { Noticia } from 'src/app/interfaces/noticia.interface';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.css']
 })
-export class AppComponent {
-  
+export class BlogComponent {
+
+  @Input() misNoticias: Noticia[] = [] //
+
   noticias: Noticia[]=[]
   newNoticia: Noticia = { titulo: "", img: "", cuerpo: "", fecha: "" }
 
@@ -28,15 +30,31 @@ export class AppComponent {
     ]
   }
 
-  getNoticia($event:Noticia){
-    //hago un push en el array
-    // hay que hacer las validaciones, mirar 2da app
-    if(this.newNoticia.titulo!=="" && this.newNoticia.img!=="" && this.newNoticia.cuerpo!=="" && this.newNoticia.fecha!==""){
+  cargarNoticias(): string {
+    let html = ""
 
-      this.noticias.push($event)
-    }else{
-      alert('Noticia incompleta')
+    this.noticias.forEach(noticia => {
+      html += `<article class="noticia">
+      <img src="${noticia.img}" alt="noticia.titulo">
+      <h3>${noticia.titulo}</h3>
+      <p>${noticia.cuerpo}</p>
+      <p>${noticia.fecha}</p>
+    </article>`
+    })
+    return html
+
+  }
+  getDataForm(){
+    // console.log(this.newNoticia)
+    //compruebo vacio
+    if(this.newNoticia.titulo!=="" && this.newNoticia.img!=="" && this.newNoticia.cuerpo!=="" && this.newNoticia.fecha!=="" ){
+      this.noticias.push(this.newNoticia)
+      this.newNoticia={ titulo: "", img: "", cuerpo: "", fecha: "" }
+    }
+    else{
+      alert('Hay algún campo vacío')
     }
     
   }
+
 }
